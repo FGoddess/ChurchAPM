@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ChurchDataBaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdmLogin" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="AdmPass" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChEvents">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EventDate" Type="date" Nullable="false" />
+          <Property Name="EvCategory" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EvType" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "ChurchDataBase.dbo.Church" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Church">
+          <Key>
+            <PropertyRef Name="Adress" />
+            <PropertyRef Name="DonationsId" />
+            <PropertyRef Name="EmployerId" />
+            <PropertyRef Name="EventsId" />
+            <PropertyRef Name="FixedAssetsId" />
+            <PropertyRef Name="InventoryItemsId" />
+            <PropertyRef Name="AdminsId" />
+          </Key>
+          <Property Name="ChName" Type="varchar" MaxLength="50" />
+          <Property Name="Adress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DonationsId" Type="int" Nullable="false" />
+          <Property Name="EmployerId" Type="int" Nullable="false" />
+          <Property Name="EventsId" Type="int" Nullable="false" />
+          <Property Name="FixedAssetsId" Type="int" Nullable="false" />
+          <Property Name="InventoryItemsId" Type="int" Nullable="false" />
+          <Property Name="AdminsId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Donations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DonationDate" Type="date" Nullable="false" />
+          <Property Name="DonationSum" Type="int" Nullable="false" />
+          <Property Name="DonationType" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sex" Type="nchar" MaxLength="1" Nullable="false" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+          <Property Name="EmpAddress" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmpProfession" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FixedAssets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateOfEntry" Type="date" Nullable="false" />
+          <Property Name="ExpirationDate" Type="date" Nullable="false" />
+          <Property Name="AnnualDepreciationRate" Type="int" Nullable="false" />
+          <Property Name="InitialCost" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InventoryItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ChurchToAdmins">
+          <End Role="Admins" Type="Self.Admins" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Church" Type="Self.Church" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admins">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Church">
+              <PropertyRef Name="AdminsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChurchToDonations">
+          <End Role="Donations" Type="Self.Donations" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Church" Type="Self.Church" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Church">
+              <PropertyRef Name="DonationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChurchToEmployers">
+          <End Role="Employers" Type="Self.Employers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Church" Type="Self.Church" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Church">
+              <PropertyRef Name="EmployerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChurchToEvents">
+          <End Role="ChEvents" Type="Self.ChEvents" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Church" Type="Self.Church" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChEvents">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Church">
+              <PropertyRef Name="EventsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChurchToFixedAssets">
+          <End Role="FixedAssets" Type="Self.FixedAssets" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Church" Type="Self.Church" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FixedAssets">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Church">
+              <PropertyRef Name="FixedAssetsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChurchToInventoryItems">
+          <End Role="InventoryItems" Type="Self.InventoryItems" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Church" Type="Self.Church" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryItems">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Church">
+              <PropertyRef Name="InventoryItemsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ChurchDataBaseModelContainer">
+          <EntitySet Name="Admins" EntityType="Self.Admins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChEvents" EntityType="Self.ChEvents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Donations" EntityType="Self.Donations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employers" EntityType="Self.Employers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FixedAssets" EntityType="Self.FixedAssets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryItems" EntityType="Self.InventoryItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Church" EntityType="Self.Church" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Church].[ChName] AS [ChName], 
+    [Church].[Adress] AS [Adress], 
+    [Church].[DonationsId] AS [DonationsId], 
+    [Church].[EmployerId] AS [EmployerId], 
+    [Church].[EventsId] AS [EventsId], 
+    [Church].[FixedAssetsId] AS [FixedAssetsId], 
+    [Church].[InventoryItemsId] AS [InventoryItemsId], 
+    [Church].[AdminsId] AS [AdminsId]
+    FROM [dbo].[Church] AS [Church]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ChurchToAdmins" Association="Self.FK_ChurchToAdmins">
+            <End Role="Admins" EntitySet="Admins" />
+            <End Role="Church" EntitySet="Church" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChurchToDonations" Association="Self.FK_ChurchToDonations">
+            <End Role="Donations" EntitySet="Donations" />
+            <End Role="Church" EntitySet="Church" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChurchToEmployers" Association="Self.FK_ChurchToEmployers">
+            <End Role="Employers" EntitySet="Employers" />
+            <End Role="Church" EntitySet="Church" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChurchToEvents" Association="Self.FK_ChurchToEvents">
+            <End Role="ChEvents" EntitySet="ChEvents" />
+            <End Role="Church" EntitySet="Church" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChurchToFixedAssets" Association="Self.FK_ChurchToFixedAssets">
+            <End Role="FixedAssets" EntitySet="FixedAssets" />
+            <End Role="Church" EntitySet="Church" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChurchToInventoryItems" Association="Self.FK_ChurchToInventoryItems">
+            <End Role="InventoryItems" EntitySet="InventoryItems" />
+            <End Role="Church" EntitySet="Church" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChurchDataBaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admins">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdmLogin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdmPass" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Church" Relationship="Self.FK_ChurchToAdmins" FromRole="Admins" ToRole="Church" />
+        </EntityType>
+        <EntityType Name="ChEvents">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EvCategory" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EvType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Church" Relationship="Self.FK_ChurchToEvents" FromRole="ChEvents" ToRole="Church" />
+        </EntityType>
+        <EntityType Name="Donations">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DonationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DonationSum" Type="Int32" Nullable="false" />
+          <Property Name="DonationType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Church" Relationship="Self.FK_ChurchToDonations" FromRole="Donations" ToRole="Church" />
+        </EntityType>
+        <EntityType Name="Employers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <Property Name="EmpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpProfession" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Church" Relationship="Self.FK_ChurchToEmployers" FromRole="Employers" ToRole="Church" />
+        </EntityType>
+        <EntityType Name="FixedAssets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateOfEntry" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AnnualDepreciationRate" Type="Int32" Nullable="false" />
+          <Property Name="InitialCost" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Church" Relationship="Self.FK_ChurchToFixedAssets" FromRole="FixedAssets" ToRole="Church" />
+        </EntityType>
+        <EntityType Name="InventoryItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Church" Relationship="Self.FK_ChurchToInventoryItems" FromRole="InventoryItems" ToRole="Church" />
+        </EntityType>
+        <EntityType Name="Church">
+          <Key>
+            <PropertyRef Name="Adress" />
+            <PropertyRef Name="DonationsId" />
+            <PropertyRef Name="EmployerId" />
+            <PropertyRef Name="EventsId" />
+            <PropertyRef Name="FixedAssetsId" />
+            <PropertyRef Name="InventoryItemsId" />
+            <PropertyRef Name="AdminsId" />
+          </Key>
+          <Property Name="ChName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DonationsId" Type="Int32" Nullable="false" />
+          <Property Name="EmployerId" Type="Int32" Nullable="false" />
+          <Property Name="EventsId" Type="Int32" Nullable="false" />
+          <Property Name="FixedAssetsId" Type="Int32" Nullable="false" />
+          <Property Name="InventoryItemsId" Type="Int32" Nullable="false" />
+          <Property Name="AdminsId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK_ChurchToAdmins" FromRole="Church" ToRole="Admins" />
+          <NavigationProperty Name="ChEvents" Relationship="Self.FK_ChurchToEvents" FromRole="Church" ToRole="ChEvents" />
+          <NavigationProperty Name="Donations" Relationship="Self.FK_ChurchToDonations" FromRole="Church" ToRole="Donations" />
+          <NavigationProperty Name="Employers" Relationship="Self.FK_ChurchToEmployers" FromRole="Church" ToRole="Employers" />
+          <NavigationProperty Name="FixedAssets" Relationship="Self.FK_ChurchToFixedAssets" FromRole="Church" ToRole="FixedAssets" />
+          <NavigationProperty Name="InventoryItems" Relationship="Self.FK_ChurchToInventoryItems" FromRole="Church" ToRole="InventoryItems" />
+        </EntityType>
+        <Association Name="FK_ChurchToAdmins">
+          <End Role="Admins" Type="Self.Admins" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Church" Type="Self.Church" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admins">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Church">
+              <PropertyRef Name="AdminsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChurchToEvents">
+          <End Role="ChEvents" Type="Self.ChEvents" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Church" Type="Self.Church" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChEvents">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Church">
+              <PropertyRef Name="EventsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChurchToDonations">
+          <End Role="Donations" Type="Self.Donations" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Church" Type="Self.Church" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Donations">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Church">
+              <PropertyRef Name="DonationsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChurchToEmployers">
+          <End Role="Employers" Type="Self.Employers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Church" Type="Self.Church" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Church">
+              <PropertyRef Name="EmployerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChurchToFixedAssets">
+          <End Role="FixedAssets" Type="Self.FixedAssets" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Church" Type="Self.Church" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FixedAssets">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Church">
+              <PropertyRef Name="FixedAssetsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChurchToInventoryItems">
+          <End Role="InventoryItems" Type="Self.InventoryItems" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Church" Type="Self.Church" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryItems">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Church">
+              <PropertyRef Name="InventoryItemsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ChurchDataBaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admins" />
+          <EntitySet Name="ChEvents" EntityType="Self.ChEvents" />
+          <EntitySet Name="Donations" EntityType="Self.Donations" />
+          <EntitySet Name="Employers" EntityType="Self.Employers" />
+          <EntitySet Name="FixedAssets" EntityType="Self.FixedAssets" />
+          <EntitySet Name="InventoryItems" EntityType="Self.InventoryItems" />
+          <EntitySet Name="Church" EntityType="Self.Church" />
+          <AssociationSet Name="FK_ChurchToAdmins" Association="Self.FK_ChurchToAdmins">
+            <End Role="Admins" EntitySet="Admins" />
+            <End Role="Church" EntitySet="Church" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChurchToEvents" Association="Self.FK_ChurchToEvents">
+            <End Role="ChEvents" EntitySet="ChEvents" />
+            <End Role="Church" EntitySet="Church" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChurchToDonations" Association="Self.FK_ChurchToDonations">
+            <End Role="Donations" EntitySet="Donations" />
+            <End Role="Church" EntitySet="Church" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChurchToEmployers" Association="Self.FK_ChurchToEmployers">
+            <End Role="Employers" EntitySet="Employers" />
+            <End Role="Church" EntitySet="Church" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChurchToFixedAssets" Association="Self.FK_ChurchToFixedAssets">
+            <End Role="FixedAssets" EntitySet="FixedAssets" />
+            <End Role="Church" EntitySet="Church" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChurchToInventoryItems" Association="Self.FK_ChurchToInventoryItems">
+            <End Role="InventoryItems" EntitySet="InventoryItems" />
+            <End Role="Church" EntitySet="Church" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ChurchDataBaseModelContainer" CdmEntityContainer="ChurchDataBaseEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="ChurchDataBaseModel.Admins">
+              <MappingFragment StoreEntitySet="Admins">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AdmLogin" ColumnName="AdmLogin" />
+                <ScalarProperty Name="AdmPass" ColumnName="AdmPass" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChEvents">
+            <EntityTypeMapping TypeName="ChurchDataBaseModel.ChEvents">
+              <MappingFragment StoreEntitySet="ChEvents">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="EvCategory" ColumnName="EvCategory" />
+                <ScalarProperty Name="EvType" ColumnName="EvType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Donations">
+            <EntityTypeMapping TypeName="ChurchDataBaseModel.Donations">
+              <MappingFragment StoreEntitySet="Donations">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DonationDate" ColumnName="DonationDate" />
+                <ScalarProperty Name="DonationSum" ColumnName="DonationSum" />
+                <ScalarProperty Name="DonationType" ColumnName="DonationType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employers">
+            <EntityTypeMapping TypeName="ChurchDataBaseModel.Employers">
+              <MappingFragment StoreEntitySet="Employers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="EmpAddress" ColumnName="EmpAddress" />
+                <ScalarProperty Name="EmpProfession" ColumnName="EmpProfession" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FixedAssets">
+            <EntityTypeMapping TypeName="ChurchDataBaseModel.FixedAssets">
+              <MappingFragment StoreEntitySet="FixedAssets">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DateOfEntry" ColumnName="DateOfEntry" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="AnnualDepreciationRate" ColumnName="AnnualDepreciationRate" />
+                <ScalarProperty Name="InitialCost" ColumnName="InitialCost" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryItems">
+            <EntityTypeMapping TypeName="ChurchDataBaseModel.InventoryItems">
+              <MappingFragment StoreEntitySet="InventoryItems">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="InvType" ColumnName="InvType" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Church">
+            <EntityTypeMapping TypeName="ChurchDataBaseModel.Church">
+              <MappingFragment StoreEntitySet="Church">
+                <ScalarProperty Name="ChName" ColumnName="ChName" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="DonationsId" ColumnName="DonationsId" />
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="EventsId" ColumnName="EventsId" />
+                <ScalarProperty Name="FixedAssetsId" ColumnName="FixedAssetsId" />
+                <ScalarProperty Name="InventoryItemsId" ColumnName="InventoryItemsId" />
+                <ScalarProperty Name="AdminsId" ColumnName="AdminsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

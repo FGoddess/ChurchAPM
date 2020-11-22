@@ -1,0 +1,43 @@
+﻿<Page x:Class="ChurchAPM.Pages.InsertEmployersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ChurchAPM.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="InsertEmployersPage">
+
+    <Grid Width="500">
+        <Border x:Name="admBorder" Margin="20" Padding="15" CornerRadius="20" Background="AliceBlue">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="25" Color="White" ShadowDepth="0" Opacity="0.7"/>
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="Insert" FontSize="25" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBox x:Name="FullNameTextBox" materialDesign:HintAssist.Hint="Full Name" Margin="15,0,15,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+                <DatePicker x:Name="BirthdayDatePicker" materialDesign:HintAssist.Hint="Birthday" Margin="15,10,15,0" Style="{StaticResource MaterialDesignDatePicker}"></DatePicker>
+                <ComboBox x:Name="SexComboBox" materialDesign:HintAssist.Hint="Sex" Margin="15,0,15,0" Style="{StaticResource MaterialDesignComboBox}">
+                    <ComboBoxItem IsSelected="True" Content="М"/>
+                    <ComboBoxItem Content="Ж"/>
+                </ComboBox>
+                <TextBox x:Name="SalaryTextBox" materialDesign:HintAssist.Hint="Salary" Margin="15,0,15,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+                <TextBox x:Name="AddressTextBox" materialDesign:HintAssist.Hint="Address" Margin="15,0,15,0" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+                <ComboBox x:Name="ProfessionComboBox" materialDesign:HintAssist.Hint="Profession" Margin="15,0,15,0" Style="{StaticResource MaterialDesignComboBox}">
+                    <ComboBoxItem IsSelected="True" Content="Епископ"/>
+                    <ComboBoxItem Content="Поп"/>
+                    <ComboBoxItem Content="Священник"/>
+                    <ComboBoxItem Content="Патриарх"/>
+                    <ComboBoxItem Content="Митрополит"/>
+                    <ComboBoxItem Content="Монахиня"/>
+                    <ComboBoxItem Content="Продавец товаров"/>
+                </ComboBox>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="EnterButton" Width="80" Height="30" Margin="15" Padding="0,0,0,2" Content="OK" Click="EnterButton_Click"></Button>
+                    <Button x:Name="CancelButton" Width="80" Height="30" Margin="230,15,15,15" Padding="0,0,0,2" Content="Cancel" Style="{StaticResource MaterialDesignFlatAccentButton}" Click="CancelButton_Click"></Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

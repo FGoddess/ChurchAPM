@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ebdfda7b4e414230aeeab724972867f8" Name="Diagram1">
+        <EntityTypeShape EntityType="ChurchDataBaseModel.Admins" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChurchDataBaseModel.ChEvents" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChurchDataBaseModel.Donations" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChurchDataBaseModel.Employers" Width="1.5" PointX="0.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChurchDataBaseModel.FixedAssets" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChurchDataBaseModel.InventoryItems" Width="1.5" PointX="0.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChurchDataBaseModel.Church" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="ChurchDataBaseModel.FK_ChurchToAdmins" ManuallyRouted="false" />
+        <AssociationConnector Association="ChurchDataBaseModel.FK_ChurchToEvents" ManuallyRouted="false" />
+        <AssociationConnector Association="ChurchDataBaseModel.FK_ChurchToDonations" ManuallyRouted="false" />
+        <AssociationConnector Association="ChurchDataBaseModel.FK_ChurchToEmployers" ManuallyRouted="false" />
+        <AssociationConnector Association="ChurchDataBaseModel.FK_ChurchToFixedAssets" ManuallyRouted="false" />
+        <AssociationConnector Association="ChurchDataBaseModel.FK_ChurchToInventoryItems" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

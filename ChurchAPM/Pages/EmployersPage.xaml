@@ -1,0 +1,62 @@
+﻿<Page x:Class="ChurchAPM.Pages.EmployersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ChurchAPM.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EmployersPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="employersDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" Grid.ColumnSpan="3" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}"/>
+                <DataGridTextColumn Header="Пол" Binding="{Binding Sex}" Width="60"/>
+                <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthday, StringFormat='{}{0:MM/dd/yyyy}'}"/>
+                <DataGridTextColumn Header="Оклад" Binding="{Binding Salary}" Width="90"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding EmpAddress}"/>
+                <DataGridTextColumn Header="Профессия" Binding="{Binding EmpProfession}"/>
+                <DataGridTemplateColumn Width="150">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="Update"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Button x:Name="UpdateButton" Content="Update" Click="UpdateButton_Click"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid x:Name="BottomGrid" Grid.Row="1" Grid.ColumnSpan="3">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="InsertButton" Height="40" Width="100" Margin="10" Content="Insert" Click="InsertButton_Click"></Button>
+                <Button x:Name="RemoveButton" Height="40" Width="100" Margin="10" Content="Remove" Click="RemoveButton_Click"></Button>
+                <TextBox x:Name="SearchTextBox" Width="200" Height="40" Margin="10" Background="AliceBlue" BorderBrush="Black" BorderThickness="2" FontSize="20"></TextBox>
+                <Button x:Name="SearchButton" Height="40" Width="100" Margin="10" Content="Search" Click="SearchButton_Click"></Button>
+                <Button x:Name="DefaultButton" Height="40" Width="50" Margin="10,25,10,25" Content="↺" Click="DefaultButton_Click" Style="{StaticResource MaterialDesignFlatAccentBgButton}" FontWeight="Bold" FontSize="20"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="FrameGrid" Grid.RowSpan="3" Grid.Column="1">
+            <Frame x:Name="EmployersMainFrame" NavigationUIVisibility="Hidden"/>
+        </Grid>
+    </Grid>
+</Page>
