@@ -22,12 +22,12 @@
 
         <DataGrid x:Name="employersDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" Grid.ColumnSpan="3" CanUserAddRows="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ФИО" Binding="{Binding FullName}"/>
-                <DataGridTextColumn Header="Пол" Binding="{Binding Sex}" Width="60"/>
-                <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthday, StringFormat='{}{0:MM/dd/yyyy}'}"/>
-                <DataGridTextColumn Header="Оклад" Binding="{Binding Salary}" Width="90"/>
-                <DataGridTextColumn Header="Адрес" Binding="{Binding EmpAddress}"/>
-                <DataGridTextColumn Header="Профессия" Binding="{Binding EmpProfession}"/>
+                <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"/>
+                <DataGridTextColumn Header="Sex" Binding="{Binding Sex}" Width="60"/>
+                <DataGridTextColumn Header="Date of Birth" Binding="{Binding Birthday, StringFormat='{}{0:MM/dd/yyyy}'}"/>
+                <DataGridTextColumn Header="Salary" Binding="{Binding Salary}" Width="90"/>
+                <DataGridTextColumn Header="Address" Binding="{Binding EmpAddress}"/>
+                <DataGridTextColumn Header="Profession" Binding="{Binding EmpProfession}"/>
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>

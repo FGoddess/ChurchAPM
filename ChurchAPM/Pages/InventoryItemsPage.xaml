@@ -21,9 +21,9 @@
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="inventoryItemsDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" Grid.Row="0" Grid.ColumnSpan="3" CanUserAddRows="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Тип" Binding="{Binding InvType}"/>
-                <DataGridTextColumn Header="Цена" Binding="{Binding Price}"/>
-                <DataGridTextColumn Header="Количество" Binding="{Binding Amount}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding InvType}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount}"/>
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>

@@ -23,10 +23,10 @@
 
         <DataGrid x:Name="eventsDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" Grid.Row="0" Grid.ColumnSpan="3" CanUserAddRows="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название" Binding="{Binding EventName}"/>
-                <DataGridTextColumn Header="Дата проведения" Binding="{Binding EventDate, StringFormat='{}{0:MM/dd/yyyy}'}"/>
-                <DataGridTextColumn Header="Категория" Binding="{Binding EvCategory}"/>
-                <DataGridTextColumn Header="Тип" Binding="{Binding EvType}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding EventName}"/>
+                <DataGridTextColumn Header="Event Date" Binding="{Binding EventDate, StringFormat='{}{0:MM/dd/yyyy}'}"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding EvCategory}"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding EvType}"/>
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>

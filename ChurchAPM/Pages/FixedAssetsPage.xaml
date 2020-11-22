@@ -21,11 +21,11 @@
         </Grid.ColumnDefinitions>
         <DataGrid x:Name="fixedAssetsDataGrid" x:FieldModifier="public" AutoGenerateColumns="False" ColumnWidth="*" Grid.Row="0" Grid.ColumnSpan="3" CanUserAddRows="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Группа" Binding="{Binding GroupName}"/>
-                <DataGridTextColumn Header="Дата ввода" Binding="{Binding DateOfEntry, StringFormat='{}{0:MM/dd/yyyy}'}"/>
-                <DataGridTextColumn Header="Дата вывода" Binding="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}"/>
-                <DataGridTextColumn Header="Амортизация" Binding="{Binding AnnualDepreciationRate}"/>
-                <DataGridTextColumn Header="Начальная стоимость" Binding="{Binding InitialCost}"/>
+                <DataGridTextColumn Header="Group" Binding="{Binding GroupName}"/>
+                <DataGridTextColumn Header="Date of Entry" Binding="{Binding DateOfEntry, StringFormat='{}{0:MM/dd/yyyy}'}"/>
+                <DataGridTextColumn Header="Expiration Date" Binding="{Binding ExpirationDate, StringFormat='{}{0:MM/dd/yyyy}'}"/>
+                <DataGridTextColumn Header="Annual Depreciation Date" Binding="{Binding AnnualDepreciationRate}"/>
+                <DataGridTextColumn Header="Initial Cost" Binding="{Binding InitialCost}"/>
                 <DataGridTemplateColumn Width="150">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
